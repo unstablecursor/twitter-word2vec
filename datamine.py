@@ -17,7 +17,7 @@ api = tweepy.API(auth, wait_on_rate_limit=True)
 
 def getTweets():
     tweets = []
-    data = tweepy.Cursor(api.search, q= "#EVET", languages = 'tr').items(1000)
+    data = tweepy.Cursor(api.search, q= "#EVET", languages = 'tr').items(100)
     for tweet in data:
         tweets.append(tweet._json)
     return tweets
@@ -25,4 +25,5 @@ def getTweets():
 
 target = open('result.txt', 'w')
 for x in getTweets():
+    print x['text'].encode('utf-8')
     target.write(x['text'].encode('utf-8'))
